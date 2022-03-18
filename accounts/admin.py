@@ -2,7 +2,10 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import Account
 
-# Register your models here.
+''' class determines how instances in the list appear,
+    only the attributes in list_display are displayed on
+    the list of instances in the GUI Admin Page'''
+
 class AccountAdmin (UserAdmin):
     list_display = ('email', 'first_name', 'last_name', 'username', 'last_login', 'date_joined', 'is_active')
     list_display_links = ('email', 'first_name', 'last_name')
