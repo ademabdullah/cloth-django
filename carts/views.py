@@ -102,3 +102,7 @@ def cart(request, total = 0, quantity = 0, cart_items = None):
     return render(request, 'store/cart.html', context)  # Creates a Http Response Object
                                                         #makes the dictionary-data available
                                                         #in the template'''
+
+
+def checkout (request):
+    return render (request, 'store/checkout.html')

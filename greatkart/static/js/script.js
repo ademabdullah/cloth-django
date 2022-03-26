@@ -7,11 +7,11 @@ $(document).ready(function() {
 
     /* ///////////////////////////////////////
 
-    THESE FOLLOWING SCRIPTS ONLY FOR BASIC USAGE, 
+    THESE FOLLOWING SCRIPTS ONLY FOR BASIC USAGE,
     For sliders, interactions and other
 
     */ ///////////////////////////////////////
-    
+
 
 	//////////////////////// Prevent closing from click inside dropdown
     $(document).on('click', '.dropdown-menu', function (e) {
@@ -50,11 +50,17 @@ $(document).ready(function() {
 	if($('[data-toggle="tooltip"]').length>0) {  // check if element exists
 		$('[data-toggle="tooltip"]').tooltip()
 	} // end if
+});
 
 
-
-
-    
-}); 
 // jquery end
 
+// A function to fade out the message that appears when a
+// user attempts to register
+
+
+setTimeout(function(){
+  // message refers to alerts.html
+  $('#message').fadeOut('slow')
+}, 2000)
+// 4000 refers to the number of milliseconds
