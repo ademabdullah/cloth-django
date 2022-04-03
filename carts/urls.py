@@ -8,8 +8,8 @@ from . import views
 urlpatterns = [
     path('', views.cart, name='cart'),
     path('add_cart/<int:product_id>/', views.add_cart, name = 'add_cart'),
-    path('subtract_cart/<int:product_id>/', views.subtract_cart, name = 'subtract_cart'),
-    path('remove_cart_item/<int:product_id>/', views.subtract_cart, name = 'remove_cart_item'),
+    path('subtract_cart/<int:product_id>/', views.subtract_cart_item, name = 'subtract_cart_item'),
+    path('remove_cart_item/<int:product_id>/<int:cart_item_id>/', views.remove_cart_item, name='remove_cart_item'),
 
     path('checkout/', views.checkout, name = 'checkout'),
               ]

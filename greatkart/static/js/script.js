@@ -56,11 +56,9 @@ $(document).ready(function() {
 // jquery end
 
 // A function to fade out the message that appears when a
-// user attempts to register
-
-
+// user attempts to logout or register
 setTimeout(function(){
   // message refers to alerts.html
   $('#message').fadeOut('slow')
 }, 2000)
-// 4000 refers to the number of milliseconds
+// 2000 refers to the number of milliseconds

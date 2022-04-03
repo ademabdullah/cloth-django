@@ -46,7 +46,7 @@
 					<div class="col">
 						<div class="input-group input-spinner">
 							<div class="input-group-prepend">
-							<a href= "{%  url 'subtract_cart' cart_item.product.id %}" class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </a>
+							<a href= "{%  url 'subtract_cart_item' cart_item.product.id %}" class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </a>
 							</div>
 							<input type="text" class="form-control"  value="{{cart_item.quantity}}">
 							<div class="input-group-append">
@@ -62,7 +62,9 @@
 		</div> <!-- price-wrap .// -->
 	</td>
 	<td class="text-right">
-	<a href="{%  url 'remove_cart_item' cart_item.product.id %}" class="btn btn-danger"> Remove </a>
+		<!-- the below reference helped me with how to use create a confirm pop up in django -->
+		<!-- https://stackoverflow.com/questions/16849117/html-how-to-do-a-confirmation-popup-to-a-submit-button-and-then-send-the-reque -->
+<a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}" onclick="return confirm('Are you sure you want to delete this item?')" class="btn btn-danger"> Remove </a>
 	</td>
 </tr>
 {%endfor%}

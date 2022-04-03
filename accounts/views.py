@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from .forms import RegistrationForm
 from .models import Account
+from carts.models import Cart, CartItem
+from carts.views import _cart_id
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
+from requests import
 
 # Create your views here.
 def register(request):
@@ -47,9 +50,21 @@ def login (request):
         user = auth.authenticate(email = email, password = password) # returns the user object
 
         if user is not None:
+            try:
+                cart = Cart.objects.get(cart_id = _cart_id(request))
+                cart_item_exists = CartItem.objects.filter (cart=cart).exists() #returns true or false
+                if cart_item_exists:
+                    cart_item = CartItem.objects.filter(cart = cart) # retrieves the items in the cart
+
+                    for item in cart_item: #assigns the user to each cart item
+                        item.user = user
+                        item.save()
+            except:
+                pass
+
             auth.login(request, user)
             messages.success(request, "You are now logged in")
-            return redirect ('dashboard')
+            return redirect ('cart')
         else:
             messages.error(request, "Invalid login credentials") # failed login details
             return redirect ('login')
@@ -57,9 +72,9 @@ def login (request):
     return render (request, 'accounts/login.html')
 
 
-''' Logs out view method, logs the user out,
-    displays a logout message, a user can only login
-    to the system if the user is logged out '''
+'''  Logs out view method, logs the user out,
+     displays a logout message, a user can only login
+     to the system if the user is logged out  '''
 
 @login_required(login_url = 'login')
 def logout (request):
@@ -67,9 +82,8 @@ def logout (request):
     messages.success(request, "You are logged out")
     return redirect ('login')
 
-'''to view the dashboard, a user must be logged in
-'''
 
+# to view the dashboard, a user must be logged in
 @login_required(login_url = 'login')
 def dashboard (request):
     return render(request, 'accounts/dashboard.html')
