@@ -5,7 +5,7 @@ from carts.models import Cart, CartItem
 from carts.views import _cart_id
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
-from requests import
+
 
 # Create your views here.
 def register(request):
